@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Pembelajaran - Menghindari Perkelahian, Miras, & Narkoba</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            750: '#154e3d',
+                            850: '#0f382c',
+                            900: '#0a271f',
+                            950: '#061a15'
+                        },
+                        gold: {
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#b89428'
+                        },
+                        cream: '#fcfbf7'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        arabic: ['Amiri', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f4f6f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* Desain Chat Room Terisolasi */
+        #chat-container {
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 12px;
+            text-align: center;
+        }
+        .chat-header h3 { margin: 0; font-size: 16px; }
+        .chat-box {
+            height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .chat-bubble {
+            background: #e1ffc7;
+            padding: 8px 12px;
+            border-radius: 8px;
+            max-width: 80%;
+            align-self: flex-end;
+            font-size: 13px;
+        }
+        .chat-bubble .meta {
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .chat-form {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            gap: 6px;
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+        .chat-form input, .chat-form select, .chat-form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        .chat-form button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .chat-form button:hover { background: #0056b3; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="bg-emerald-850 text-white shadow-lg sticky top-0 z-50 border-b-2 border-gold-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('dashboard')">
+                    <div class="w-12 h-12 bg-gold-500/20 border border-gold-500 rounded-xl flex items-center justify-center text-gold-500 text-2xl shadow-inner">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-gold-400 tracking-wider uppercase block">Modul PAI Bab 3</span>
+                        <h1 class="text-lg sm:text-xl font-bold text-cream leading-tight">Mencegah Perkelahian, Miras & Narkoba</h1>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-gold-400 bg-emerald-900/60 border border-gold-500/30">
+                        <i class="fa-solid fa-house"></i> <span>Dashboard</span>
+                    </button>
+                    <button onclick="switchTab('materi')" id="nav-materi" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-emerald-800">
+                        <i class="fa-solid fa-book-open"></i> <span>Modul Materi</span>
+                    </button>
+                    <button onclick="switchTab('flashcard')" id="nav-flashcard" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-emerald-800">
+                        <i class="fa-solid fa-clone"></i> <span>Flashcards</span>
+                    </button>
+                    <button onclick="switchTab('kuis')" id="nav-kuis" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-emerald-800">
+                        <i class="fa-solid fa-list-check"></i> <span>Kuis & Game</span>
+                    </button>
+                    <button onclick="switchTab('tracker')" id="nav-tracker" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-emerald-800">
+                        <i class="fa-solid fa-calendar-check"></i> <span>Habit Tracker</span>
+                    </button>
+                    <button onclick="switchTab('glosarium')" id="nav-glosarium" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-emerald-800">
+                        <i class="fa-solid fa-spell-check"></i> <span>Kamus</span>
+                    </button>
+                    <!-- TABS PESAN BARU SETELAH KAMUS -->
+                    <button onclick="switchTab('pesan')" id="nav-pesan" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium transition flex items-center space-x-2 text-slate-300 hover:text-white hover:bg-emerald-800">
+                        <i class="fa-solid fa-envelope"></i> <span>Pesan</span>
+                    </button>
+                </nav>
+
+                <div class="hidden lg:flex items-center space-x-3 bg-emerald-900/80 px-3 py-1.5 rounded-full border border-gold-500/30">
+                    <i class="fa-solid fa-chart-line text-gold-400"></i>
+                    <span class="text-xs text-slate-300">Progres:</span>
+                    <span id="overall-progress-text" class="text-xs font-bold text-gold-400">0%</span>
+                </div>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white focus:outline-none text-xl p-2">
+                    <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-emerald-900 border-t border-emerald-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('dashboard')" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-emerald-800">
+                <i class="fa-solid fa-house w-6 text-gold-400"></i> Dashboard
+            </button>
+            <button onclick="switchTab('materi')" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-emerald-800">
+                <i class="fa-solid fa-book-open w-6 text-gold-400"></i> Modul Materi
+            </button>
+            <button onclick="switchTab('flashcard')" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-emerald-800">
+                <i class="fa-solid fa-clone w-6 text-gold-400"></i> Flashcards Hafalan
+            </button>
+            <button onclick="switchTab('kuis')" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-emerald-800">
+                <i class="fa-solid fa-list-check w-6 text-gold-400"></i> Kuis Interaktif
+            </button>
+            <button onclick="switchTab('tracker')" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-emerald-800">
+                <i class="fa-solid fa-calendar-check w-6 text-gold-400"></i> Habit Tracker
+            </button>
+            <button onclick="switchTab('glosarium')" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-emerald-800">
+                <i class="fa-solid fa-spell-check w-6 text-gold-400"></i> Kamus Istilah
+            </button>
+            <button onclick="switchTab('pesan')" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-emerald-800">
+                <i class="fa-solid fa-envelope w-6 text-gold-400"></i> Pesan
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- TAB 1: DASHBOARD -->
+        <section id="tab-dashboard" class="tab-content block space-y-8">
+            <div class="bg-gradient-to-r from-emerald-850 via-emerald-900 to-emerald-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl border border-gold-500/30">
+                <div class="space-y-4">
+                    <span class="inline-block bg-gold-500 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                        ★ Pendidikan Agama Islam Kelas XI - Bab 3
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-cream leading-snug">
+                        Menghindari Perkelahian Pelajar, Minuman Keras, dan Narkoba
+                    </h1>
+                    <p class="text-slate-200 text-sm sm:text-base leading-relaxed opacity-90">
+                        Memahami bahaya perilaku menyimpang, dalil pengharaman khamr dan narkoba, serta pentingnya ikhtiar menjaga diri dan akal demi masa depan yang lebih baik.
+                    </p>
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button onclick="switchTab('materi')" class="bg-gold-500 hover:bg-gold-600 text-slate-950 font-bold px-5 py-2.5 rounded-xl transition shadow-md text-sm flex items-center space-x-2">
+                            <span>Mulai Belajar</span> <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="switchTab('kuis')" class="bg-emerald-800/80 hover:bg-emerald-800 text-white border border-slate-300/30 font-bold px-5 py-2.5 rounded-xl transition text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-play"></i> <span>Uji Pemahaman</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Widgets -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-extrabold text-emerald-900" id="dash-materi-count">0/4</div>
+                        <div class="text-xs text-slate-500 font-medium">Modul Materi Selesai</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-extrabold text-amber-900" id="dash-quiz-score">-</div>
+                        <div class="text-xs text-slate-500 font-medium">Skor Terbaik Kuis</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-800 rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-extrabold text-teal-900" id="dash-habit-count">0/5</div>
+                        <div class="text-xs text-slate-500 font-medium">Amalan Hari Ini</div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200/80 flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-800 rounded-xl flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-clone"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-extrabold text-purple-900">8 Card</div>
+                        <div class="text-xs text-slate-500 font-medium">Flashcard Hafalan</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dalil Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative overflow-hidden">
+                    <div class="border-b border-slate-100 pb-3 mb-4 flex items-center justify-between">
+                        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-md border border-emerald-200">
+                            <i class="fa-solid fa-quran mr-1"></i> Larangan Khamr & Judi
+                        </span>
+                        <span class="text-xs text-slate-400">QS. Al-Ma'idah: 90</span>
+                    </div>
+                    <div class="text-right font-arabic text-xl sm:text-2xl text-emerald-950 leading-relaxed mb-4">
+                        يَٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوٓا۟ إِنَّمَا ٱلْخَمْرُ وَٱلْمَيْسِرُ وَٱلْأَنصَابُ وَٱلْأَزْلَٰمُ رِجْسٌ مِّنْ عَمَلِ ٱلشَّيْطَٰنِ فَٱجْتَنِبُوهُ لَعَلَّكُمْ تُفْلِحُونَ
+                    </div>
+                    <p class="text-slate-600 italic text-sm leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+                        "Wahai orang-orang yang beriman! Sesungguhnya minuman keras, berjudi, (berkurban untuk) berhala, dan mengundi nasib dengan anak panah, adalah perbuatan keji dan termasuk perbuatan setan. Maka jauhilah (perbuatan-perbuatan) itu agar kamu beruntung."
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 relative overflow-hidden">
+                    <div class="border-b border-slate-100 pb-3 mb-4 flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-800 bg-amber-50 px-3 py-1 rounded-md border border-amber-200">
+                            <i class="fa-solid fa-scroll mr-1"></i> Hadits Pengharaman Khamr
+                        </span>
+                        <span class="text-xs text-slate-400">HR. Ahmad & Abu Daud</span>
+                    </div>
+                    <div class="text-right font-arabic text-2xl sm:text-3xl text-emerald-950 leading-relaxed mb-4">
+                        كُلُّ مُسْكِرٍ خَمْرٌ وَكُلُّ خَمْرٍ حَرَامٌ
+                    </div>
+                    <p class="text-slate-600 italic text-sm leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-200/60">
+                        "Setiap yang memabukkan adalah khamr, dan setiap khamr adalah diharamkan."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Learning Roadmap -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                <h3 class="text-lg font-bold text-emerald-950 mb-6 flex items-center">
+                    <i class="fa-solid fa-route text-gold-500 mr-2"></i> Peta Alur Pembelajaran Bab 3
+                </h3>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div onclick="openModuleDetail('materi-1')" class="group p-5 bg-emerald-50/50 hover:bg-emerald-800 hover:text-white rounded-2xl border border-emerald-200/80 transition cursor-pointer">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-800 text-gold-400 group-hover:bg-gold-500 group-hover:text-emerald-950 flex items-center justify-center font-bold mb-3 transition">1</div>
+                        <h4 class="font-bold text-base mb-1 text-emerald-950 group-hover:text-white">Perkelahian Pelajar</h4>
+                        <p class="text-xs text-slate-600 group-hover:text-emerald-100 leading-relaxed">Definisi perkelahian, delikuensi situasional & sistematik, serta 6 faktor pemicu.</p>
+                    </div>
+
+                    <div onclick="openModuleDetail('materi-2')" class="group p-5 bg-emerald-50/50 hover:bg-emerald-800 hover:text-white rounded-2xl border border-emerald-200/80 transition cursor-pointer">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-800 text-gold-400 group-hover:bg-gold-500 group-hover:text-emerald-950 flex items-center justify-center font-bold mb-3 transition">2</div>
+                        <h4 class="font-bold text-base mb-1 text-emerald-950 group-hover:text-white">Penanganan Remaja</h4>
+                        <p class="text-xs text-slate-600 group-hover:text-emerald-100 leading-relaxed">5 Prinsip penanganan: Kepercayaan, Kemurnian Hati, Empati, Kejujuran, & Persepsi.</p>
+                    </div>
+
+                    <div onclick="openModuleDetail('materi-3')" class="group p-5 bg-emerald-50/50 hover:bg-emerald-800 hover:text-white rounded-2xl border border-emerald-200/80 transition cursor-pointer">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-800 text-gold-400 group-hover:bg-gold-500 group-hover:text-emerald-950 flex items-center justify-center font-bold mb-3 transition">3</div>
+                        <h4 class="font-bold text-base mb-1 text-emerald-950 group-hover:text-white">Minuman Keras (Khamr)</h4>
+                        <p class="text-xs text-slate-600 group-hover:text-emerald-100 leading-relaxed">Definisi khamr, QS. Al-Ma'idah: 90-91, asbabun nuzul, dan dampak buruk miras.</p>
+                    </div>
+
+                    <div onclick="openModuleDetail('materi-4')" class="group p-5 bg-emerald-50/50 hover:bg-emerald-800 hover:text-white rounded-2xl border border-emerald-200/80 transition cursor-pointer">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-800 text-gold-400 group-hover:bg-gold-500 group-hover:text-emerald-950 flex items-center justify-center font-bold mb-3 transition">4</div>
+                        <h4 class="font-bold text-base mb-1 text-emerald-950 group-hover:text-white">Bahaya Narkoba</h4>
+                        <p class="text-xs text-slate-600 group-hover:text-emerald-100 leading-relaxed">Pengertian Narkotika, Psikotropika, Zat Adiktif, Qiyas hukum, & upaya pencegahan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: MODUL MATERI -->
+        <section id="tab-materi" class="tab-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div>
+                    <h2 class="text-xl font-bold text-emerald-950">Modul Pembelajaran Interaktif</h2>
+                    <p class="text-xs text-slate-500">Pilih sub-bab untuk mempelajari materi secara mendalam</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="showSubMateri('materi-1')" id="subnav-materi-1" class="submateri-btn px-3 py-1.5 rounded-lg text-xs font-bold transition bg-emerald-850 text-gold-400">1. Perkelahian Pelajar</button>
+                    <button onclick="showSubMateri('materi-2')" id="subnav-materi-2" class="submateri-btn px-3 py-1.5 rounded-lg text-xs font-medium transition bg-slate-100 text-slate-600 hover:bg-slate-200">2. Penanganan Pelajar</button>
+                    <button onclick="showSubMateri('materi-3')" id="subnav-materi-3" class="submateri-btn px-3 py-1.5 rounded-lg text-xs font-medium transition bg-slate-100 text-slate-600 hover:bg-slate-200">3. Minuman Keras</button>
+                    <button onclick="showSubMateri('materi-4')" id="subnav-materi-4" class="submateri-btn px-3 py-1.5 rounded-lg text-xs font-medium transition bg-slate-100 text-slate-600 hover:bg-slate-200">4. Bahaya Narkoba</button>
+                </div>
+            </div>
+
+            <!-- MATERI 1 -->
+            <div id="materi-1" class="submateri-card bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-users-slash"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-950">1. Perkelahian Pelajar</h3>
+                            <span class="text-xs text-slate-500">Definisi, Jenis Kenakalan, dan Faktor Penyebab Perkelahian</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleCompleteModule('materi-1')" id="btn-complete-materi-1" class="text-xs font-semibold px-4 py-2 rounded-xl border transition flex items-center space-x-2 border-slate-300 text-slate-600 hover:bg-slate-50">
+                        <i class="fa-regular fa-circle-check"></i> <span>Tandai Selesai</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-emerald-50/60 p-5 rounded-2xl border border-emerald-100">
+                        <h4 class="font-bold text-emerald-900 mb-2 flex items-center text-base">
+                            <i class="fa-solid fa-lightbulb text-gold-500 mr-2"></i> Pengertian Perkelahian Pelajar
+                        </h4>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-3">
+                            Perkelahian antarpelajar adalah bentuk tindakan kekerasan atau agresi yang dilakukan oleh suatu kelompok pelajar terhadap kelompok lain untuk menyingkirkan atau membuat lawan tidak berdaya.
+                        </p>
+                        <p class="text-sm text-slate-700 leading-relaxed bg-white p-3 rounded-xl border border-emerald-200/80 font-medium">
+                            Menurut Sarlito W. Sarwono, kenakalan remaja adalah perbuatan seseorang yang belum dewasa yang sengaja melanggar hukum dan disadari bahwa perbuatannya dapat dikenai sanksi.
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/60 p-5 rounded-2xl border border-amber-100">
+                        <h4 class="font-bold text-amber-900 mb-2 flex items-center text-base">
+                            <i class="fa-solid fa-layer-group text-amber-600 mr-2"></i> Jenis Kenakalan Remaja
+                        </h4>
+                        <ul class="text-xs text-slate-700 space-y-2 mt-2">
+                            <li><strong>1) Delikuensi Situasional:</strong> Perkelahian terjadi karena situasi mendesak yang mengharuskan mereka memecahkan masalah secara cepat.</li>
+                            <li><strong>2) Delikuensi Sistematik:</strong> Pelajar tergabung dalam geng/organisasi yang memiliki aturan dan kebiasaan tertentu seperti berkelahi, melukai, atau mencuri.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 mb-2 text-sm uppercase tracking-wider">6 Faktor Penyebab Perkelahian Pelajar</h4>
+                    <p class="text-xs text-slate-500 mb-3"><i class="fa-solid fa-hand-pointer mr-1 text-gold-500"></i>Klik salah satu faktor di bawah ini untuk melihat detail penjelasan:</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div onclick="openFaktorModal('rational')" class="p-4 bg-slate-50 hover:bg-emerald-50/80 rounded-xl border border-slate-200 cursor-pointer transition shadow-sm hover:shadow-md group">
+                            <div class="text-emerald-800 font-bold text-sm mb-1 group-hover:text-emerald-950 flex items-center justify-between">
+                                <span>1. Rational Choice</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-emerald-800"></i>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">Faktor individu, motivasi, dan kemauan sendiri.</p>
+                        </div>
+
+                        <div onclick="openFaktorModal('social')" class="p-4 bg-slate-50 hover:bg-emerald-50/80 rounded-xl border border-slate-200 cursor-pointer transition shadow-sm hover:shadow-md group">
+                            <div class="text-emerald-800 font-bold text-sm mb-1 group-hover:text-emerald-950 flex items-center justify-between">
+                                <span>2. Social Disorganization</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-emerald-800"></i>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">Faktor kondisi lingkungan masyarakat.</p>
+                        </div>
+
+                        <div onclick="openFaktorModal('strain')" class="p-4 bg-slate-50 hover:bg-emerald-50/80 rounded-xl border border-slate-200 cursor-pointer transition shadow-sm hover:shadow-md group">
+                            <div class="text-emerald-800 font-bold text-sm mb-1 group-hover:text-emerald-950 flex items-center justify-between">
+                                <span>3. Strain</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-emerald-800"></i>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">Tekanan besar dari lingkungan sekitar/masyarakat.</p>
+                        </div>
+
+                        <div onclick="openFaktorModal('differential')" class="p-4 bg-slate-50 hover:bg-emerald-50/80 rounded-xl border border-slate-200 cursor-pointer transition shadow-sm hover:shadow-md group">
+                            <div class="text-emerald-800 font-bold text-sm mb-1 group-hover:text-emerald-950 flex items-center justify-between">
+                                <span>4. Differential Association</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-emerald-800"></i>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">Faktor salah pergaulan dan pengaruh teman.</p>
+                        </div>
+
+                        <div onclick="openFaktorModal('labelling')" class="p-4 bg-slate-50 hover:bg-emerald-50/80 rounded-xl border border-slate-200 cursor-pointer transition shadow-sm hover:shadow-md group">
+                            <div class="text-emerald-800 font-bold text-sm mb-1 group-hover:text-emerald-950 flex items-center justify-between">
+                                <span>5. Labelling</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-emerald-800"></i>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">Terbiasa dicap negatif atau nakal oleh lingkungan.</p>
+                        </div>
+
+                        <div onclick="openFaktorModal('male')" class="p-4 bg-slate-50 hover:bg-emerald-50/80 rounded-xl border border-slate-200 cursor-pointer transition shadow-sm hover:shadow-md group">
+                            <div class="text-emerald-800 font-bold text-sm mb-1 group-hover:text-emerald-950 flex items-center justify-between">
+                                <span>6. Male Phenomenon</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-400 group-hover:text-emerald-800"></i>
+                            </div>
+                            <p class="text-xs text-slate-600 leading-relaxed">Kecenderungan kecenderungan anak laki-laki berkelahi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-emerald-900 to-emerald-950 text-white p-6 rounded-2xl shadow-md border border-gold-500/40 space-y-2 mt-6">
+                    <div class="flex items-center space-x-2 text-gold-400 font-bold text-base">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                        <h4>Ikhtiar Mencegah Perilaku Menyimpang</h4>
+                    </div>
+                    <ul class="text-xs sm:text-sm text-slate-200 leading-relaxed list-disc list-inside space-y-1">
+                        <li>Memberi kesempatan luas bagi pelajar untuk mengembangkan bakat dan minat.</li>
+                        <li>Mewujudkan kehidupan keluarga yang harmonis tanpa membandingkan potensi anak.</li>
+                        <li>Pengembangan pribadi optimal di sekolah melalui wadah organisasi positif.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MATERI 2 -->
+            <div id="materi-2" class="submateri-card hidden bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-user-gear"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-950">2. Penanganan Pelajar Menyimpang</h3>
+                            <span class="text-xs text-slate-500">5 Prinsip Utama Penanganan dan Pendampingan Pelajar</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleCompleteModule('materi-2')" id="btn-complete-materi-2" class="text-xs font-semibold px-4 py-2 rounded-xl border transition flex items-center space-x-2 border-slate-300 text-slate-600 hover:bg-slate-50">
+                        <i class="fa-regular fa-circle-check"></i> <span>Tandai Selesai</span>
+                    </button>
+                </div>
+
+                <p class="text-sm text-slate-700 leading-relaxed">
+                    Menangani pelajar yang melakukan perilaku menyimpang membutuhkan pendekatan yang bijak dan tidak menghakimi. Ada 5 prinsip kunci yang harus dimiliki:
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-900 text-sm mb-1"><i class="fa-solid fa-handshake-angle text-gold-500 mr-2"></i>1. Kepercayaan</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Pelajar harus memiliki rasa percaya kepada pihak pembimbing (Wali Kelas, Guru BP/BK, Guru Agama).</p>
+                    </div>
+
+                    <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-900 text-sm mb-1"><i class="fa-solid fa-heart text-gold-500 mr-2"></i>2. Kemurnian Hati</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Pelajar percaya bahwa proses bantuan dan pendampingan yang diberikan bersifat tulus tanpa syarat.</p>
+                    </div>
+
+                    <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-900 text-sm mb-1"><i class="fa-solid fa-comments text-gold-500 mr-2"></i>3. Empati</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Kemampuan guru/pembimbing untuk mengerti dan menghayati perasaan yang dialami oleh pelajar.</p>
+                    </div>
+
+                    <div class="bg-emerald-50/60 p-4 rounded-xl border border-emerald-200">
+                        <h4 class="font-bold text-emerald-900 text-sm mb-1"><i class="fa-solid fa-scale-balanced text-gold-500 mr-2"></i>4. Kejujuran</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed">Keterbukaan mengenai sanksi atau konsekuensi yang harus diterima, disampaikan secara jujur namun mendidik.</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50/80 p-5 rounded-2xl border border-amber-200 space-y-2">
+                    <h4 class="font-bold text-amber-900 text-sm"><i class="fa-solid fa-eye mr-2"></i>5. Mengutamakan Persepsi</h4>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Pelajar cenderung memandang persoalan dari sudut pandangnya sendiri. Pembimbing perlu memahami cara pandang pelajar tersebut terlebih dahulu sebelum memberikan masukan.
+                    </p>
+                </div>
+            </div>
+
+            <!-- MATERI 3 -->
+            <div id="materi-3" class="submateri-card hidden bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-wine-glass-empty"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-950">3. Minuman Keras (Khamr)</h3>
+                            <span class="text-xs text-slate-500">Pengertian Khamr, Dalil Al-Qur'an, Asbabun Nuzul, & Bahaya</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleCompleteModule('materi-3')" id="btn-complete-materi-3" class="text-xs font-semibold px-4 py-2 rounded-xl border transition flex items-center space-x-2 border-slate-300 text-slate-600 hover:bg-slate-50">
+                        <i class="fa-regular fa-circle-check"></i> <span>Tandai Selesai</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-emerald-50/60 p-5 rounded-2xl border border-emerald-100">
+                        <h4 class="font-bold text-emerald-900 mb-2 flex items-center text-base">
+                            <i class="fa-solid fa-book-bookmark text-gold-500 mr-2"></i> Pengertian Khamr
+                        </h4>
+                        <p class="text-sm text-slate-700 leading-relaxed mb-2">
+                            Khamr (خمر) adalah jenis minuman dan makanan yang memabukkan dan menghilangkan kesadaran. Secara umum, makna khamr merakup segala hal yang memabukkan dan merusak akal sehat.
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/60 p-5 rounded-2xl border border-amber-100">
+                        <h4 class="font-bold text-amber-900 mb-2 flex items-center text-base">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-600 mr-2"></i> Bahaya Khamr
+                        </h4>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Miras merusak saraf, mental, liver, bersifat racun, merusak akhlak, serta menjadi sumber dari segala kehancuran moral dan sosial.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border-l-4 border-emerald-800 border-t border-r border-b border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider block">Tahapan Pengharaman Khamr</span>
+                            <h4 class="text-lg font-bold text-slate-800">Asbabun Nuzul QS. Al-Ma'idah: 90-91</h4>
+                        </div>
+                        <i class="fa-solid fa-quran text-3xl text-slate-300 flex-shrink-0"></i>
+                    </div>
+                    <ul class="text-xs text-slate-600 space-y-2 leading-relaxed">
+                        <li><strong>1. Tahap Pertama (QS. Al-Baqarah: 219):</strong> Dijelaskan bahwa khamr mengandung dosa besar dan beberapa manfaat, tetapi dosanya lebih besar.</li>
+                        <li><strong>2. Tahap Kedua (QS. An-Nisa': 43):</strong> Larangan melaksanakan shalat dalam keadaan mabuk.</li>
+                        <li><strong>3. Tahap Ketiga (QS. Al-Ma'idah: 90-91):</strong> Penegasan haram secara mutlak, menyebut khamr sebagai <em>rijs</em> (keji/kotor) dan perbuatan setan.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MATERI 4 -->
+            <div id="materi-4" class="submateri-card hidden bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b border-slate-200 pb-4 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-pills"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-emerald-950">4. Bahaya Narkoba</h3>
+                            <span class="text-xs text-slate-500">Narkotika, Psikotropika, Zat Adiktif, Hukum Qiyas, & Pencegahan</span>
+                        </div>
+                    </div>
+                    <button onclick="toggleCompleteModule('materi-4')" id="btn-complete-materi-4" class="text-xs font-semibold px-4 py-2 rounded-xl border transition flex items-center space-x-2 border-slate-300 text-slate-600 hover:bg-slate-50">
+                        <i class="fa-regular fa-circle-check"></i> <span>Tandai Selesai</span>
+                    </button>
+                </div>
+
+                <div class="bg-emerald-50/70 p-5 rounded-2xl border border-emerald-200">
+                    <h4 class="font-bold text-emerald-950 text-base mb-1">Hukum Narkoba Menurut Syariat Islam</h4>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        Meskipun kata "narkoba" tidak ada secara eksplisit dalam Al-Qur'an, penentuannya dilakukan melalui <strong>Qiyas</strong> (menganalogikan dengan khamr) karena memiliki kesamaan <em>'illat</em> (sebab hukum), yaitu sama-sama memabukkan, merusak akal, dan membahayakan jiwa.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-900 mb-3 text-sm">Pembagian Jenis Narkoba</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                            <strong class="text-emerald-800 block text-sm mb-1"><i class="fa-solid fa-capsules mr-1"></i> 1. Narkotika</strong>
+                            Zat/obat dari tanaman atau sintetis yang menurunkan kesadaran, menghilangkan rasa nyeri, dan menyebabkan ketergantungan (contoh: Morfin, Putaw, Ganja, Kokain).
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                            <strong class="text-emerald-800 block text-sm mb-1"><i class="fa-solid fa-brain mr-1"></i> 2. Psikotropika</strong>
+                            Zat psikoaktif yang mempengaruhi susunan saraf pusat dan aktivitas mental (contoh: Amphetamine, Shabu, Ekstasi, Obat Penenang).
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                            <strong class="text-emerald-800 block text-sm mb-1"><i class="fa-solid fa-smoking mr-1"></i> 3. Zat Adiktif</strong>
+                            Bahan aktif yang menimbulkan kecanduan/adiksi yang sulit dihentikan (contoh: Nikotin pada rokok, Alkohol/Etanol, Inhalansia).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border-l-4 border-amber-500 border-t border-r border-b border-slate-200 shadow-sm space-y-2">
+                    <h4 class="text-base font-bold text-slate-800">Langkah Mencegah Penyalahgunaan Narkoba</h4>
+                    <ul class="text-xs text-slate-700 leading-relaxed list-disc list-inside space-y-1">
+                        <li>Mencintai dan mensyukuri hidup anugerah Allah SWT.</li>
+                        <li>Mengembangkan potensi, minat, bakat, dan hobi yang positif.</li>
+                        <li>Berani berkata "TIDAK" serta menolak tegas ajakan penyalahgunaan narkoba.</li>
+                        <li>Pencegahan dari lingkungan keluarga, sekolah, tempat kerja, dan masyarakat.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: FLASHCARDS -->
+        <section id="tab-flashcard" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-emerald-950">Flashcards Hafalan Istilah</h2>
+                    <p class="text-xs text-slate-500">Klik pada kartu untuk membalik & melihat penjelasan lengkap</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span id="flashcard-counter" class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1.5 rounded-lg">Kartu 1 dari 8</span>
+                    <button onclick="shuffleFlashcards()" class="text-xs font-semibold px-3 py-1.5 bg-emerald-50 text-emerald-800 rounded-lg border border-emerald-200 hover:bg-emerald-100">
+                        <i class="fa-solid fa-shuffle mr-1"></i> Acak Kartu
+                    </button>
+                </div>
+            </div>
+
+            <div class="max-w-xl mx-auto perspective-1000 my-8">
+                <div id="flashcard-inner" onclick="flipCard()" class="relative w-full h-80 rounded-3xl shadow-xl transition-transform duration-500 transform-style-3d cursor-pointer bg-white border-2 border-gold-500/40">
+                    <div class="absolute inset-0 w-full h-full rounded-3xl bg-gradient-to-br from-emerald-850 to-emerald-900 text-white p-8 flex flex-col items-center justify-center text-center backface-hidden">
+                        <span class="text-xs font-semibold uppercase tracking-widest text-gold-400 mb-4 bg-emerald-950/60 px-3 py-1 rounded-full border border-gold-500/30">ISTILAH BAB 3</span>
+                        <h3 id="fc-term" class="text-3xl font-extrabold text-cream mb-2">Khamr</h3>
+                        <p id="fc-category" class="text-xs text-emerald-200">Kategori: Minuman Keras</p>
+                        <div class="mt-8 text-xs text-gold-400 animate-pulse flex items-center">
+                            <i class="fa-solid fa-hand-pointer mr-2"></i> Klik kartu untuk balik
+                        </div>
+                    </div>
+
+                    <div class="absolute inset-0 w-full h-full rounded-3xl bg-white text-slate-800 p-8 flex flex-col items-center justify-center text-center backface-hidden rotate-y-180 border-2 border-emerald-800">
+                        <span class="text-xs font-semibold uppercase tracking-widest text-emerald-800 mb-2 bg-emerald-50 px-3 py-1 rounded-full">PENJELASAN & MAKNA</span>
+                        <p id="fc-desc" class="text-sm sm:text-base text-slate-700 leading-relaxed font-medium mt-2">
+                            Segala jenis minuman/makanan yang memabukkan dan menghilangkan akal sehat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-center space-x-4">
+                <button onclick="prevFlashcard()" class="w-12 h-12 bg-white rounded-full border border-slate-300 text-slate-700 shadow-sm hover:bg-slate-50 flex items-center justify-center transition">
+                    <i class="fa-solid fa-chevron-left text-lg"></i>
+                </button>
+                <button onclick="nextFlashcard()" class="w-12 h-12 bg-emerald-850 rounded-full text-gold-400 shadow-md hover:bg-emerald-900 flex items-center justify-center transition">
+                    <i class="fa-solid fa-chevron-right text-lg"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 4: KUIS & EVALUASI -->
+        <section id="tab-kuis" class="tab-content hidden space-y-8">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="text-sm font-bold text-emerald-950 uppercase tracking-wider mb-3 flex items-center">
+                    <i class="fa-solid fa-id-card text-gold-500 mr-2"></i> Identitas Siswa
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="quiz-student-name" class="block text-xs font-bold text-slate-600 mb-1">Nama Lengkap</label>
+                        <input type="text" id="quiz-student-name" placeholder="Masukkan nama lengkap..." class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800">
+                    </div>
+                    <div>
+                        <label for="quiz-student-class" class="block text-xs font-bold text-slate-600 mb-1">Kelas</label>
+                        <input type="text" id="quiz-student-class" placeholder="Masukkan kelas (contoh: XI IPA 1)..." class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex border-b border-slate-200 overflow-x-auto">
+                <button onclick="switchQuizMode('multiple-choice')" id="mode-mc-btn" class="px-5 py-3 font-bold text-sm border-b-2 border-emerald-800 text-emerald-900 flex-shrink-0">
+                    <i class="fa-solid fa-list-check mr-2"></i> Pilihan Ganda
+                </button>
+                <button onclick="switchQuizMode('match-game')" id="mode-match-btn" class="px-5 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-800 flex-shrink-0">
+                    <i class="fa-solid fa-puzzle-piece mr-2"></i> Game Pencocokan Istilah
+                </button>
+                <button onclick="switchQuizMode('wheel-game')" id="mode-wheel-btn" class="px-5 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-800 flex-shrink-0">
+                    <i class="fa-solid fa-dharmachakra mr-2"></i> Roda Keberuntungan
+                </button>
+            </div>
+
+            <!-- MODE 1: MULTIPLE CHOICE QUIZ -->
+            <div id="quiz-mc-wrapper" class="space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-emerald-950">Kuis Evaluasi Pemahaman Bab 3</h2>
+                        <p class="text-xs text-slate-500">Jawab 5 pertanyaan kuis berdasarkan materi Bab 3 Kelas 11</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400 block">Skor Kuis</span>
+                        <span id="quiz-live-score" class="text-xl font-extrabold text-gold-600">0 / 100</span>
+                    </div>
+                </div>
+
+                <div id="quiz-container" class="space-y-6"></div>
+
+                <div class="text-center pt-4">
+                    <button id="btn-submit-quiz" onclick="submitQuiz()" class="bg-emerald-850 hover:bg-emerald-900 text-gold-400 font-bold px-8 py-3 rounded-xl shadow-lg transition flex items-center justify-center mx-auto space-x-2">
+                        <span>Submit & Lihat Nilai</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- MODE 2: MATCHING GAME -->
+            <div id="quiz-match-wrapper" class="hidden space-y-6">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h2 class="text-lg font-bold text-emerald-950 mb-1">Pencocokan Istilah Bab 3</h2>
+                    <p class="text-xs text-slate-500">Klik item pada kolom kiri lalu klik pasangan jawabannya pada kolom kanan</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Istilah / Konsep</h3>
+                        <div id="match-left-list" class="space-y-2"></div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 space-y-3">
+                        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Definisi / Penjelasan</h3>
+                        <div id="match-right-list" class="space-y-2"></div>
+                    </div>
+                </div>
+
+                <div id="match-feedback" class="hidden p-4 rounded-xl text-center font-bold text-sm"></div>
+            </div>
+
+            <!-- MODE 3: GAME RODA KEBERUNTUNGAN -->
+            <div id="wheel-game-container" class="hidden p-6 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="text-center max-w-xl mx-auto space-y-2">
+                    <h2 class="text-2xl font-extrabold text-emerald-950 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-dharmachakra text-gold-500"></i> Roda Keberuntungan Edukasi
+                    </h2>
+                    <p class="text-xs text-slate-600">Putar roda untuk mendapatkan kategori soal, bonus poin, atau tantangan interaktif seputar Bab 3!</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <!-- Kanvas Roda -->
+                    <div class="lg:col-span-7 flex flex-col items-center justify-center relative">
+                        <!-- Jarum Penunjuk Atas -->
+                        <div class="w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-t-[32px] border-t-rose-600 z-10 -mb-4 drop-shadow-md"></div>
+                        <canvas id="wheel-canvas" width="360" height="360" class="max-w-full drop-shadow-xl cursor-pointer transition-transform hover:scale-105"></canvas>
+                        
+                        <button id="spin-btn" onclick="spinWheel()" class="mt-6 bg-gold-500 hover:bg-gold-600 text-slate-950 font-extrabold px-8 py-3.5 rounded-full shadow-lg transition flex items-center space-x-2 text-base transform active:scale-95">
+                            <i class="fa-solid fa-rotate mr-1"></i> <span>PUTAR RODA</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel Informasi & Tantangan -->
+                    <div class="lg:col-span-5 bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4 shadow-inner">
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Status Permainan</span>
+                            <span id="wheel-score" class="text-sm font-extrabold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full">Poin: 0</span>
+                        </div>
+
+                        <div id="wheel-result-card" class="bg-white p-5 rounded-xl border border-slate-200 space-y-3 min-h-[200px] flex flex-col justify-center">
+                            <div class="text-center space-y-2">
+                                <span class="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-full inline-flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-arrows-spin"></i>
+                                </span>
+                                <h3 id="wheel-sector-title" class="text-lg font-bold text-slate-800">Siap Memutar?</h3>
+                                <p id="wheel-sector-desc" class="text-xs text-slate-600 leading-relaxed">Klik tombol "PUTAR RODA" di samping untuk menentukan tantangan atau pertanyaanmu!</p>
+                            </div>
+
+                            <!-- Form Jawaban / Aksi -->
+                            <div id="wheel-action-area" class="hidden space-y-3 pt-2">
+                                <textarea id="wheel-user-answer" rows="3" placeholder="Tuliskan jawaban atau tanggapanmu..." class="w-full p-3 text-xs border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-800 bg-slate-50"></textarea>
+                                <button onclick="submitWheelAnswer()" class="w-full py-2.5 bg-emerald-850 hover:bg-emerald-900 text-gold-400 font-bold text-xs rounded-xl transition">
+                                    Kirim Jawaban (+20 Poin)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: HABIT TRACKER -->
+        <section id="tab-tracker" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-xl font-bold text-emerald-950">Jurnal Amalan Diri Bab 3</h2>
+                    <p class="text-xs text-slate-500">Penerapan gaya hidup sehat, menjauhi kenakalan, dan memperkuat benteng iman</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-xs text-slate-400 block">Capaian Hari Ini</span>
+                    <span id="tracker-percentage" class="text-lg font-bold text-emerald-800">0% Selesai</span>
+                </div>
+            </div>
+
+            <!-- Identitas Siswa pada Habit Tracker -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="text-sm font-bold text-emerald-950 uppercase tracking-wider mb-3 flex items-center">
+                    <i class="fa-solid fa-id-card text-gold-500 mr-2"></i> Identitas Siswa
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="nama" class="block text-xs font-bold text-slate-600 mb-1">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap..." class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800">
+                    </div>
+                    <div>
+                        <label for="kelas" class="block text-xs font-bold text-slate-600 mb-1">Kelas</label>
+                        <input type="text" id="kelas" name="kelas" placeholder="Masukkan kelas..." class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+                <h3 class="font-bold text-slate-800 text-sm border-b pb-2">Daftar Amalan Mencegah Perilaku Menyimpang</h3>
+                <div class="space-y-3" id="habit-checklist-container"></div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-3">
+                <h3 class="font-bold text-slate-800 text-sm flex items-center">
+                    <i class="fa-solid fa-pen-to-square text-gold-500 mr-2"></i> Refleksi Diri Hari Ini
+                </h3>
+                <textarea id="reflection-note" rows="4" placeholder="Tuliskan komitmenmu dalam menjauhi pergaulan bebas, menjaga akal sehat, atau membantu teman dari perilaku negatif..." class="w-full p-4 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-800 focus:outline-none"></textarea>
+                <button onclick="saveReflectionNote()" class="text-xs bg-emerald-850 text-gold-400 font-bold px-4 py-2 rounded-lg hover:bg-emerald-900 transition">
+                    Simpan Catatan
+                </button>
+            </div>
+        </section>
+
+        <!-- TAB 6: GLOSARIUM / KAMUS -->
+        <section id="tab-glosarium" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-emerald-950">Kamus Istilah Bab 3 (Glosarium)</h2>
+                        <p class="text-xs text-slate-500">Cari definisi istilah penting dari Bab 3 Kelas 11</p>
+                    </div>
+                    <div class="relative w-full sm:w-72">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-sm"></i>
+                        <input type="text" id="glosarium-search" oninput="filterGlosarium()" placeholder="Cari istilah (mis. Khamr)..." class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-800">
+                    </div>
+                </div>
+            </div>
+
+            <div id="glosarium-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </section>
+
+        <!-- TAB 7: PESAN (BARU) -->
+        <section id="tab-pesan" class="tab-content hidden space-y-6">
+            <!-- DUKUNGAN KARTU PROFIL GURU & PESAN INTERAKTIF -->
+            <div class="bg-emerald-850 text-white rounded-3xl p-6 shadow-md border border-gold-500/30">
+                <div class="flex items-center space-x-4">
+                    <img src="https://imgur.com/HqxdRU8.jpg" alt="Foto Guru" class="w-20 h-20 rounded-full object-cover border-2 border-gold-500 shadow-sm flex-shrink-0">
+                    <div>
+                        <span class="inline-block bg-gold-500/20 text-gold-400 border border-gold-500/40 text-[10px] font-bold px-2 py-0.5 rounded mb-1">Guru Pengampu</span>
+                        <h2 class="font-bold text-cream text-lg leading-tight">Suyanso, S.Pd.I</h2>
+                        <div class="text-xs text-slate-300 space-y-0.5 mt-1">
+                            <p><i class="fa-solid fa-book-reader mr-1 text-gold-400"></i> Guru Pendidikan Agama Islam</p>
+                            <p><i class="fa-solid fa-school mr-1 text-gold-400"></i> SMAN 1 Parung</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+                <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-900 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-comments text-emerald-800"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-emerald-950">Konsultasi & Tanya Guru</h3>
+                            <p class="text-xs text-slate-500">Kirimkan pertanyaan atau diskusi langsung kepada guru pengampu</p>
+                        </div>
+                    </div>
+                    <button onclick="muatPesan()" class="text-xs bg-emerald-50 text-emerald-800 hover:bg-emerald-100 font-semibold px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center space-x-1">
+                        <i class="fa-solid fa-rotate-right"></i> <span>Refresh</span>
+                    </button>
+                </div>
+
+                <!-- Area Riwayat Chat -->
+                <div id="interactive-chat-box" class="h-64 overflow-y-auto bg-slate-50 p-4 rounded-xl border border-slate-200/80 space-y-3">
+                    <!-- Pesan dimuat secara dinamis dari Google Apps Script -->
+                </div>
+
+                <!-- Form Kirim Pesan -->
+                <form id="chat-form" class="space-y-3 bg-white pt-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label for="nama-siswa" class="block text-[11px] font-bold text-slate-600 mb-1">Nama Kamu</label>
+                            <input type="text" id="nama-siswa" placeholder="Masukkan nama..." required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-emerald-800">
+                        </div>
+                        <div>
+                            <label for="guru-tujuan" class="block text-[11px] font-bold text-slate-600 mb-1">Tujuan Guru</label>
+                            <select id="guru-tujuan" required class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-emerald-800">
+                                <option value="">Pilih Guru...</option>
+                                <option value="Suyanso, S.Pd.I (PAI)">Suyanso, S.Pd.I (PAI)</option>
+                                <option value="Pak Budi (Matematika)">Pak Budi (Matematika)</option>
+                                <option value="Bu Siti (Bahasa Inggris)">Bu Siti (Bahasa Inggris)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="pesan-siswa" class="block text-[11px] font-bold text-slate-600 mb-1">Pesan / Pertanyaan</label>
+                        <textarea id="pesan-siswa" rows="2" placeholder="Tuliskan pertanyaanmu di sini..." required class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-emerald-800"></textarea>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" id="btn-kirim-pesan" class="bg-emerald-850 hover:bg-emerald-900 text-gold-400 font-bold px-5 py-2 rounded-lg text-xs transition shadow-md flex items-center justify-center space-x-2 ml-auto">
+                            <i class="fa-solid fa-paper-plane"></i> <span>Kirim Pesan</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- POPUP MODAL FAKTOR PERKELAHIAN -->
+    <div id="hikmah-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-emerald-800/20 relative animate-fade-in space-y-4">
+            <button onclick="closeFaktorModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-lg p-2">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="flex items-center space-x-3 border-b border-slate-100 pb-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold" id="modal-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 class="text-lg font-bold text-emerald-950" id="modal-title">Faktor Perkelahian</h3>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded">Penjelasan</span>
+                    <p class="text-xs sm:text-sm text-slate-700 leading-relaxed mt-1" id="modal-pengertian"></p>
+                </div>
+            </div>
+
+            <div class="text-right pt-2">
+                <button onclick="closeFaktorModal()" class="px-4 py-2 bg-emerald-850 hover:bg-emerald-900 text-white rounded-xl text-xs font-bold transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-emerald-950 text-slate-400 border-t border-emerald-900 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs space-y-2">
+            <p class="font-medium text-slate-300">Modul Interaktif Pendidikan Agama Islam & Budi Pekerti - Kelas XI</p>
+            <p>© 2026 Aco Sys A Ma • Menghindari Perkelahian, Miras & Narkoba</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // State Aplikasi
+        const state = {
+            activeTab: 'dashboard',
+            activeSubMateri: 'materi-1',
+            completedModules: {
+                'materi-1': false,
+                'materi-2': false,
+                'materi-3': false,
+                'materi-4': false
+            },
+            quizScore: null,
+            flashcardIndex: 0,
+            habits: [
+                { id: 'h1', text: 'Menjauhi pergaulan bebas dan geng yang memicu konflik (Perkelahian)', done: false },
+                { id: 'h2', text: 'Menolak dan tidak mencoba minuman keras / alkohol (Miras)', done: false },
+                { id: 'h3', text: 'Menjaga akal dan kesehatan dari segala bentuk narkotika & rokok (Narkoba)', done: false },
+                { id: 'h4', text: 'Mengikuti kegiatan ekstrakurikuler/organisasi positif (Pengembangan Diri)', done: false },
+                { id: 'h5', text: 'Menjaga komunikasi yang harmonis dengan orang tua dan guru (Sosial)', done: false }
+            ]
+        };
+
+        const faktorData = {
+            rational: {
+                title: "Rational Choice",
+                icon: "fa-brain",
+                pengertian: "Adanya perkelahian pelajar disebabkan oleh faktor individu, motivasi, pilihan, serta kemauannya sendiri untuk terlibat aksi perkelahian."
+            },
+            social: {
+                title: "Social Disorganization",
+                icon: "fa-building-un",
+                pengertian: "Perkelahian terjadi akibat pengaruh lingkungan sekitar atau masyarakat yang tidak teratur, kurang pengawasan, dan memicu ketegangan."
+            },
+            strain: {
+                title: "Strain",
+                icon: "fa-compress-arrows-alt",
+                pengertian: "Perkelahian disebabkan oleh faktor tekanan yang sangat besar dari lingkungan masyarakat atau norma sosial yang menghimpit pelajar."
+            },
+            differential: {
+                title: "Differential Association",
+                icon: "fa-user-group",
+                pengertian: "Perkelahian disebabkan oleh faktor salah pergaulan, terpengaruh kelompok sebaya yang membiasakan perilaku tidak baik."
+            },
+            labelling: {
+                title: "Labelling",
+                icon: "fa-tag",
+                pengertian: "Perkelahian terjadi karena pelajar terbiasa cap/stigma negatif dari masyarakat sebagai anak 'nakal', sehingga perilakunya terdorong menyesuaikan cap tersebut."
+            },
+            male: {
+                title: "Male Phenomenon",
+                icon: "fa-mars",
+                pengertian: "Adanya kecenderungan faktor jenis kelamin, di mana anak laki-laki secara statistik lebih mendominasi angka perkelahian dibanding anak perempuan."
+            }
+        };
+
+        function openFaktorModal(type) {
+            const data = faktorData[type];
+            if(!data) return;
+
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-icon').innerHTML = `<i class="fa-solid ${data.icon}"></i>`;
+            document.getElementById('modal-pengertian').textContent = data.pengertian;
+
+            document.getElementById('hikmah-modal').classList.remove('hidden');
+        }
+
+        function closeFaktorModal() {
+            document.getElementById('hikmah-modal').classList.add('hidden');
+        }
+
+        const flashcardsData = [
+            { term: 'Khamr', category: 'Minuman Keras', desc: 'Segala jenis minuman/makanan yang memabukkan dan merusak akal sehat.' },
+            { term: 'Qiyas', category: 'Hukum Islam', desc: 'Metode penetapan hukum narkoba dengan menganalogikannya kepada khamr karena ada kesamaan illat.' },
+            { term: 'Rijs', category: 'Miras & Judi', desc: 'Sikap/perbuatan yang amat sangat tercela, buruk, keji, jijik, kotor, atau najis.' },
+            { term: 'Delikuensi Situasional', category: 'Perkelahian Pelajar', desc: 'Perkelahian akibat situasi mendesak untuk menyelesaikan masalah secara cepat.' },
+            { term: 'Delikuensi Sistematik', category: 'Perkelahian Pelajar', desc: 'Perkelahian karena terikat aturan kelompok/geng yang memiliki kebiasaan melanggar hukum.' },
+            { term: 'Narkotika', category: 'Narkoba', desc: 'Zat/obat yang menurunkan kesadaran, menghilangkan rasa nyeri, dan menimbulkan ketergantungan.' },
+            { term: 'Psikotropika', category: 'Narkoba', desc: 'Zat/obat alamiah/sintetis non-narkotika yang berkhasiat psikoaktif pada susunan saraf pusat.' },
+            { term: 'Zat Adiktif', category: 'Narkoba', desc: 'Bahan aktif yang menyebabkan kecanduan/adiksi yang sulit dihentikan (contoh: Nikotin).' }
+        ];
+
+        const quizData = [
+            {
+                id: 1,
+                question: 'Berdasarkan QS. Al-Ma\'idah ayat 90, minuman keras, judi, berkurban untuk berhala, dan mengundi nasib termasuk perbuatan...',
+                options: [
+                    'Makruh dan sia-sia',
+                    'Rijs dan perbuatan setan',
+                    'Mubazir dan merugikan',
+                    'Fasik dan dosa kecil'
+                ],
+                correct: 1,
+                explanation: 'QS. Al-Ma\'idah: 90 secara tegas menyebutkan perbuatan-perbuatan tersebut adalah "rijsun min \'amalisy-syaithan" (perbuatan keji dan termasuk perbuatan setan).'
+            },
+            {
+                id: 2,
+                question: 'Penetapan hukum haram pada Narkoba di dalam Islam menggunakan metode...',
+                options: [
+                    'Ijma\' para sahabat',
+                    'Qiyas dengan Khamr',
+                    'Istihsan dari ulama',
+                    'Maslahah Mursalah'
+                ],
+                correct: 1,
+                explanation: 'Narkoba diqiyaskan (dianalogikan) dengan khamr karena memiliki persamaan illat (sebab hukum), yaitu sama-sama memabukkan dan merusak akal.'
+            },
+            {
+                id: 3,
+                question: 'Perkelahian antarpelajar yang terjadi karena keterlibatan dalam geng yang memiliki aturan dan kebiasaan melanggar hukum disebut...',
+                options: [
+                    'Delikuensi Situasional',
+                    'Delikuensi Sistematik',
+                    'Rational Choice',
+                    'Differential Association'
+                ],
+                correct: 1,
+                explanation: 'Delikuensi systematic terjadi ketika pelajar berada dalam suatu geng/organisasi yang mewajibkan anggotanya mengikuti kebiasaan menyimpang.'
+            },
+            {
+                id: 4,
+                question: 'Berikut ini adalah salah satu dari 5 prinsip penting dalam menangani pelajar yang menyimpang, kecuali...',
+                options: [
+                    'Empati',
+                    'Kemurnian Hati',
+                    'Kejujuran',
+                    'Penghakiman Seketika'
+                ],
+                correct: 3,
+                explanation: '5 Prinsip penanganan pelajar menyimpang meliputi Kepercayaan, Kemurnian Hati, Empati, Kejujuran, dan Mengutamakan Persepsi.'
+            },
+            {
+                id: 5,
+                question: 'Zat psikoaktif yang mempengaruhi susunan saraf pusat sehingga menyebabkan perubahan khas pada aktivitas mental dan perilaku disebut...',
+                options: [
+                    'Narkotika',
+                    'Psikotropika',
+                    'Inhalansia',
+                    'Metanol'
+                ],
+                correct: 1,
+                explanation: 'Psikotropika adalah zat/obat alamiah maupun sintetis (bukan narkotika) yang berkhasiat psikoaktif mempengaruhi susunan saraf pusat.'
+            }
+        ];
+
+        const matchData = [
+            { id: 'm1', term: 'Khamr', desc: 'Setiap bahan/minuman yang memabukkan dan merusak akal' },
+            { id: 'm2', term: 'Labelling', desc: 'Faktor pemicu perkelahian akibat terbiasa dicap nakal' },
+            { id: 'm3', term: 'Psikotropika', desc: 'Zat psikoaktif pemengaruh saraf pusat (misal: Shabu, Ekstasi)' },
+            { id: 'm4', term: 'Empati', desc: 'Kemampuan mengerti dan menghayati perasaan pelajar' }
+        ];
+
+        const glosariumData = [
+            { term: 'Khamr', def: 'Minuman atau makanan yang memabukkan dan menghilangkan kesadaran/akal sehat.' },
+            { term: 'Narkotika', def: 'Zat/obat dari tanaman atau sintetis yang dapat menurunkan kesadaran dan menimbulkan ketergantungan.' },
+            { term: 'Psikotropika', def: 'Zat psikoaktif bukan narkotika yang mempengaruhi susunan saraf pusat dan aktivitas mental.' },
+            { term: 'Zat Adiktif', def: 'Bahan aktif yang menyebabkan kecanduan yang sulit dihentikan (contoh: Nikotin).' },
+            { term: 'Delikuensi Situasional', def: 'Perkelahian terjadi karena situasi mendesak untuk memecahkan masalah dengan cepat.' },
+            { term: 'Delikuensi Sistematik', def: 'Perkelahian akibat terikat aturan/kebiasaan geng tertentu.' },
+            { term: 'Qiyas', def: 'Menganalogikan hukum suatu masalah baru yang belum ada nashnya dengan masalah lama yang sudah ada nash hukumnya.' },
+            { term: 'Rijs', def: 'Perbuatan yang sangat tercela, buruk, keji, kotor, dan jijik.' }
+        ];
+
+        function switchTab(tabId) {
+            state.activeTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-gold-400', 'bg-emerald-900/60', 'border', 'border-gold-500/30');
+                btn.classList.add('text-slate-300');
+            });
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if(activeNav) {
+                activeNav.classList.remove('text-slate-300');
+                activeNav.classList.add('text-gold-400', 'bg-emerald-900/60', 'border', 'border-gold-500/30');
+            }
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function showSubMateri(materiId) {
+            state.activeSubMateri = materiId;
+            document.querySelectorAll('.submateri-card').forEach(el => el.classList.add('hidden'));
+            document.getElementById(materiId).classList.remove('hidden');
+
+            document.querySelectorAll('.submateri-btn').forEach(btn => {
+                btn.classList.remove('bg-emerald-850', 'text-gold-400');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            const activeSub = document.getElementById(`subnav-${materiId}`);
+            if(activeSub) {
+                activeSub.classList.remove('bg-slate-100', 'text-slate-600');
+                activeSub.classList.add('bg-emerald-850', 'text-gold-400');
+            }
+        }
+
+        function openModuleDetail(materiId) {
+            switchTab('materi');
+            showSubMateri(materiId);
+        }
+
+        function toggleCompleteModule(materiId) {
+            state.completedModules[materiId] = !state.completedModules[materiId];
+            const btn = document.getElementById(`btn-complete-${materiId}`);
+            
+            if(state.completedModules[materiId]) {
+                btn.className = "text-xs font-semibold px-4 py-2 rounded-xl border transition flex items-center space-x-2 bg-emerald-100 border-emerald-300 text-emerald-900";
+                btn.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-700"></i> <span>Selesai</span>`;
+            } else {
+                btn.className = "text-xs font-semibold px-4 py-2 rounded-xl border transition flex items-center space-x-2 border-slate-300 text-slate-600 hover:bg-slate-50";
+                btn.innerHTML = `<i class="fa-regular fa-circle-check"></i> <span>Tandai Selesai</span>`;
+            }
+
+            updateDashboardStats();
+        }
+
+        function updateDashboardStats() {
+            const completedCount = Object.values(state.completedModules).filter(Boolean).length;
+            document.getElementById('dash-materi-count').textContent = `${completedCount}/4`;
+
+            const percent = Math.round((completedCount / 4) * 100);
+            document.getElementById('overall-progress-text').textContent = `${percent}%`;
+        }
+
+        let isFlipped = false;
+
+        function updateFlashcardUI() {
+            const data = flashcardsData[state.flashcardIndex];
+            document.getElementById('fc-term').textContent = data.term;
+            document.getElementById('fc-category').textContent = `Kategori: ${data.category}`;
+            document.getElementById('fc-desc').textContent = data.desc;
+            document.getElementById('flashcard-counter').textContent = `Kartu ${state.flashcardIndex + 1} dari ${flashcardsData.length}`;
+
+            if(isFlipped) {
+                document.getElementById('flashcard-inner').classList.remove('rotate-y-180');
+                isFlipped = false;
+            }
+        }
+
+        function flipCard() {
+            const card = document.getElementById('flashcard-inner');
+            card.classList.toggle('rotate-y-180');
+            isFlipped = !isFlipped;
+        }
+
+        function nextFlashcard() {
+            state.flashcardIndex = (state.flashcardIndex + 1) % flashcardsData.length;
+            updateFlashcardUI();
+        }
+
+        function prevFlashcard() {
+            state.flashcardIndex = (state.flashcardIndex - 1 + flashcardsData.length) % flashcardsData.length;
+            updateFlashcardUI();
+        }
+
+        function shuffleFlashcards() {
+            flashcardsData.sort(() => Math.random() - 0.5);
+            state.flashcardIndex = 0;
+            updateFlashcardUI();
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            if(!container) return;
+            container.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4';
+                
+                let optionsHtml = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHtml += `
+                        <label class="flex items-center p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition text-xs font-medium space-x-3">
+                            <input type="radio" name="question-${q.id}" value="${optIdx}" class="text-emerald-800 focus:ring-emerald-800">
+                            <span>${opt}</span>
+                        </label>
+                    `;
+                });
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between">
+                        <span class="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md">Soal ${idx + 1}</span>
+                    </div>
+                    <h3 class="font-bold text-slate-800 text-sm leading-relaxed">${q.question}</h3>
+                    <div class="space-y-2">${optionsHtml}</div>
+                    <div id="explanation-${q.id}" class="hidden p-3 bg-emerald-50 text-emerald-900 text-xs rounded-xl border border-emerald-200">
+                        <strong>Pembahasan:</strong> ${q.explanation}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function submitQuiz() {
+            const nameInput = document.getElementById('quiz-student-name').value.trim();
+            const classInput = document.getElementById('quiz-student-class').value.trim();
+
+            if (!nameInput || !classInput) {
+                alert('Silakan isi Nama Lengkap dan Kelas terlebih dahulu pada bagian Identitas Siswa.');
+                return;
+            }
+
+            let correctCount = 0;
+
+            quizData.forEach(q => {
+                const selected = document.querySelector(`input[name="question-${q.id}"]:checked`);
+                const expl = document.getElementById(`explanation-${q.id}`);
+                if(expl) expl.classList.remove('hidden');
+
+                if(selected && parseInt(selected.value) === q.correct) {
+                    correctCount++;
+                }
+            });
+
+            const score = (correctCount / quizData.length) * 100;
+            state.quizScore = score;
+            document.getElementById('quiz-live-score').textContent = `${score} / 100`;
+            document.getElementById('dash-quiz-score').textContent = `${score}`;
+
+            if (typeof google !== 'undefined' && google.script && google.script.run) {
+                google.script.run
+                    .withSuccessHandler(function(response) {
+                        alert(`Nilai kamu (${score}) berhasil tersimpan ke Google Sheet!`);
+                    })
+                    .withFailureHandler(function(err) {
+                        alert('Gagal menyimpan nilai: ' + err.message);
+                    })
+                    .submitScore(nameInput, classInput, score);
+            } else {
+                alert(`Kuis selesai! Skor kamu: ${score}.`);
+            }
+        }
+
+        function switchQuizMode(mode) {
+            document.getElementById('quiz-mc-wrapper').classList.add('hidden');
+            document.getElementById('quiz-match-wrapper').classList.add('hidden');
+            document.getElementById('wheel-game-container').classList.add('hidden');
+
+            document.getElementById('mode-mc-btn').className = 'px-5 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-800 flex-shrink-0';
+            document.getElementById('mode-match-btn').className = 'px-5 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-800 flex-shrink-0';
+            document.getElementById('mode-wheel-btn').className = 'px-5 py-3 font-bold text-sm text-slate-500 border-b-2 border-transparent hover:text-slate-800 flex-shrink-0';
+
+            if(mode === 'multiple-choice') {
+                document.getElementById('quiz-mc-wrapper').classList.remove('hidden');
+                document.getElementById('mode-mc-btn').className = 'px-5 py-3 font-bold text-sm border-b-2 border-emerald-800 text-emerald-900 flex-shrink-0';
+            } else if(mode === 'match-game') {
+                document.getElementById('quiz-match-wrapper').classList.remove('hidden');
+                document.getElementById('mode-match-btn').className = 'px-5 py-3 font-bold text-sm border-b-2 border-emerald-800 text-emerald-900 flex-shrink-0';
+                renderMatchingGame();
+            } else if(mode === 'wheel-game') {
+                document.getElementById('wheel-game-container').classList.remove('hidden');
+                document.getElementById('mode-wheel-btn').className = 'px-5 py-3 font-bold text-sm border-b-2 border-emerald-800 text-emerald-900 flex-shrink-0';
+                drawWheel();
+            }
+        }
+
+        let selectedLeft = null;
+
+        function renderMatchingGame() {
+            const leftList = document.getElementById('match-left-list');
+            const rightList = document.getElementById('match-right-list');
+            if(!leftList || !rightList) return;
+            
+            leftList.innerHTML = '';
+            rightList.innerHTML = '';
+
+            const shuffledRight = [...matchData].sort(() => Math.random() - 0.5);
+
+            matchData.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-3 rounded-xl border border-slate-200 hover:border-emerald-800 text-xs font-bold text-slate-800 transition shadow-sm';
+                btn.textContent = item.term;
+                btn.onclick = () => selectLeftMatch(item.id, btn);
+                leftList.appendChild(btn);
+            });
+
+            shuffledRight.forEach(item => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-3 rounded-xl border border-slate-200 hover:border-emerald-800 text-xs text-slate-600 transition shadow-sm';
+                btn.textContent = item.desc;
+                btn.onclick = () => selectRightMatch(item.id, btn);
+                rightList.appendChild(btn);
+            });
+        }
+
+        function selectLeftMatch(id, btnEl) {
+            document.querySelectorAll('#match-left-list button').forEach(b => b.classList.remove('bg-emerald-100', 'border-emerald-800'));
+            btnEl.classList.add('bg-emerald-100', 'border-emerald-800');
+            selectedLeft = id;
+        }
+
+        function selectRightMatch(id, btnEl) {
+            if(!selectedLeft) return;
+
+            const feedback = document.getElementById('match-feedback');
+            feedback.classList.remove('hidden');
+
+            if(selectedLeft === id) {
+                feedback.className = 'p-4 rounded-xl text-center font-bold text-sm bg-emerald-100 text-emerald-900 border border-emerald-300';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-2"></i> Benar! Pasangan istilah cocok.';
+            } else {
+                feedback.className = 'p-4 rounded-xl text-center font-bold text-sm bg-rose-100 text-rose-900 border border-rose-300';
+                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-2"></i> Kurang tepat, coba lagi!';
+            }
+        }
+
+        /* --- LOGIKA RODA KEBERUNTUNGAN --- */
+        const wheelSectors = [
+            { label: "Perkelahian", color: "#0f382c", textColor: "#ffffff", type: "question", text: "Sebutkan salah satu faktor pemicu perkelahian pelajar!" },
+            { label: " Bonus +10 ", color: "#d4af37", textColor: "#0f382c", type: "bonus", text: "Selamat! Kamu mendapatkan bonus 10 poin instan!" },
+            { label: "Miras & Khamr", color: "#154e3d", textColor: "#ffffff", type: "question", text: "Apa arti istilah 'Khamr' menurut Al-Qur'an dan Hadits?" },
+            { label: " Tantangan ", color: "#b89428", textColor: "#ffffff", type: "challenge", text: "Bagaimana cara bijak menolak ajakan teman untuk mencoba hal negatif?" },
+            { label: "Bahaya Narkoba", color: "#0a271f", textColor: "#ffffff", type: "question", text: "Jelaskan metode Qiyas dalam penetapan hukum haramnya Narkoba!" },
+            { label: " Bonus +20 ", color: "#e5c158", textColor: "#0f382c", type: "bonus", text: "Luar biasa! Kamu memenangkan bonus 20 poin!" }
+        ];
+
+        let currentAngle = 0;
+        let isSpinning = false;
+        let totalWheelScore = 0;
+
+        function drawWheel() {
+            const canvas = document.getElementById('wheel-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const numSectors = wheelSectors.length;
+            const arcSize = (2 * Math.PI) / numSectors;
+            const radius = canvas.width / 2;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < numSectors; i++) {
+                const angle = currentAngle + i * arcSize;
+                
+                ctx.beginPath();
+                ctx.fillStyle = wheelSectors[i].color;
+                ctx.moveTo(radius, radius);
+                ctx.arc(radius, radius, radius - 5, angle, angle + arcSize);
+                ctx.lineTo(radius, radius);
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "#ffffff";
+                ctx.stroke();
+
+                ctx.save();
+                ctx.translate(radius, radius);
+                ctx.rotate(angle + arcSize / 2);
+                ctx.textAlign = "right";
+                ctx.fillStyle = wheelSectors[i].textColor;
+                ctx.font = "bold 13px 'Plus Jakarta Sans', sans-serif";
+                ctx.fillText(wheelSectors[i].label, radius - 20, 5);
+                ctx.restore();
+            }
+
+            ctx.beginPath();
+            ctx.arc(radius, radius, 25, 0, 2 * Math.PI);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#d4af37";
+            ctx.stroke();
+        }
+
+        function spinWheel() {
+            if (isSpinning) return;
+            isSpinning = true;
+
+            const spinBtn = document.getElementById('spin-btn');
+            spinBtn.disabled = true;
+            spinBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            document.getElementById('wheel-action-area').classList.add('hidden');
+
+            const spinDuration = 4000;
+            const extraDegrees = Math.floor(Math.random() * 360) + 1440;
+            const startAngle = currentAngle;
+            const targetAngle = startAngle + (extraDegrees * Math.PI / 180);
+            const startTime = performance.now();
+
+            function animate(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / spinDuration, 1);
+                
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                currentAngle = startAngle + (targetAngle - startAngle) * easeOut;
+
+                drawWheel();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    isSpinning = false;
+                    spinBtn.disabled = false;
+                    spinBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    evaluateWheelResult();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function evaluateWheelResult() {
+            const numSectors = wheelSectors.length;
+            const arcSize = (2 * Math.PI) / numSectors;
+            
+            const normalizedAngle = (1.5 * Math.PI - (currentAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+            const selectedIndex = Math.floor(normalizedAngle / arcSize) % numSectors;
+            const sector = wheelSectors[selectedIndex];
+
+            document.getElementById('wheel-sector-title').textContent = sector.label;
+            document.getElementById('wheel-sector-desc').textContent = sector.text;
+
+            if (sector.type === 'bonus') {
+                const bonusPoints = sector.label.includes('10') ? 10 : 20;
+                totalWheelScore += bonusPoints;
+                document.getElementById('wheel-score').textContent = `Poin: ${totalWheelScore}`;
+            } else {
+                document.getElementById('wheel-action-area').classList.remove('hidden');
+                document.getElementById('wheel-user-answer').value = '';
+            }
+        }
+
+        function submitWheelAnswer() {
+            const answer = document.getElementById('wheel-user-answer').value.trim();
+            if (!answer) {
+                alert('Silakan tuliskan jawabanmu terlebih dahulu!');
+                return;
+            }
+
+            totalWheelScore += 20;
+            document.getElementById('wheel-score').textContent = `Poin: ${totalWheelScore}`;
+            document.getElementById('wheel-action-area').classList.add('hidden');
+            document.getElementById('wheel-sector-title').textContent = 'Jawaban Terkirim!';
+            document.getElementById('wheel-sector-desc').textContent = 'Hebat! Kamu berhasil menyelesaikan tantangan dan mendapatkan 20 poin bonus. Putar roda lagi untuk melanjutkan!';
+        }
+
+        /* --- HABIT TRACKER & GLOSARIUM --- */
+        function renderHabitTracker() {
+            const container = document.getElementById('habit-checklist-container');
+            if(!container) return;
+            container.innerHTML = '';
+
+            state.habits.forEach(h => {
+                const item = document.createElement('label');
+                item.className = 'flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200 hover:bg-slate-100 cursor-pointer transition text-xs font-medium';
+                item.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <input type="checkbox" ${h.done ? 'checked' : ''} onchange="toggleHabit('${h.id}')" class="w-4 h-4 text-emerald-800 focus:ring-emerald-800 rounded">
+                        <span class="${h.done ? 'line-through text-slate-400' : 'text-slate-800'}">${h.text}</span>
+                    </div>
+                    <span class="text-[10px] text-emerald-800 font-bold bg-emerald-100 px-2 py-0.5 rounded">Harian</span>
+                `;
+                container.appendChild(item);
+            });
+
+            updateHabitProgress();
+        }
+
+        function toggleHabit(id) {
+            const habit = state.habits.find(h => h.id === id);
+            if(habit) {
+                habit.done = !habit.done;
+                renderHabitTracker();
+            }
+        }
+
+        function updateHabitProgress() {
+            const doneCount = state.habits.filter(h => h.done).length;
+            const percent = Math.round((doneCount / state.habits.length) * 100);
+            
+            const percEl = document.getElementById('tracker-percentage');
+            if(percEl) percEl.textContent = `${percent}% Selesai`;
+            
+            const dashHabit = document.getElementById('dash-habit-count');
+            if(dashHabit) dashHabit.textContent = `${doneCount}/${state.habits.length}`;
+        }
+
+        function saveReflectionNote() {
+            const note = document.getElementById('reflection-note').value.trim();
+            if(!note) {
+                alert('Tuliskan refleksi diri kamu terlebih dahulu.');
+                return;
+            }
+            alert('Catatan refleksi berhasil disimpan!');
+        }
+
+        function renderGlosarium(items) {
+            const container = document.getElementById('glosarium-list');
+            if(!container) return;
+            container.innerHTML = '';
+
+            items.forEach(g => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-1';
+                card.innerHTML = `
+                    <h4 class="font-bold text-emerald-950 text-base">${g.term}</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">${g.def}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterGlosarium() {
+            const query = document.getElementById('glosarium-search').value.toLowerCase();
+            const filtered = glosariumData.filter(g => 
+                g.term.toLowerCase().includes(query) || g.def.toLowerCase().includes(query)
+            );
+            renderGlosarium(filtered);
+        }
+
+        /* --- SKRIP CHAT ROOM GURU (GOOGLE APPS SCRIPT) --- */
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwaWX-0df3uv2Z0_tMHTC20GHyl7aUbma9qephTi58_wH811UCZY1Edk2vM3rx5HOSQzg/exec";
+
+        async function muatPesan() {
+            const chatBox = document.getElementById('interactive-chat-box');
+            if (!chatBox) return;
+
+            chatBox.innerHTML = '<div class="text-center text-xs text-slate-400 py-4"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Memuat pesan...</div>';
+
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                
+                chatBox.innerHTML = '';
+                if(!data || data.length === 0) {
+                    chatBox.innerHTML = '<div class="text-center text-xs text-slate-400 py-4">Belum ada pesan. Mulai diskusi sekarang!</div>';
+                    return;
+                }
+
+                data.forEach(item => {
+                    const bubble = document.createElement('div');
+                    bubble.className = 'bg-white p-3 rounded-xl border border-slate-200 shadow-sm space-y-1 max-w-[85%] ml-auto';
+                    bubble.innerHTML = `
+                        <div class="flex items-center justify-between text-[10px] text-slate-400 border-b border-slate-100 pb-1 mb-1">
+                            <span class="font-bold text-emerald-800">${item.namaSiswa || 'Siswa'} <span class="font-normal text-slate-500">ke</span> ${item.guruTujuan || 'Guru'}</span>
+                            <span>${item.waktu || ''}</span>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">${item.pesan}</p>
+                    `;
+                    chatBox.appendChild(bubble);
+                });
+
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                chatBox.innerHTML = '<div class="text-center text-xs text-rose-500 py-4">Gagal memuat pesan. Periksa koneksi internet Anda.</div>';
+            }
+        }
+
+        // Inisialisasi Event Listener dan Tampilan Awal
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuiz();
+            renderHabitTracker();
+            renderGlosarium(glosariumData);
+            updateFlashcardUI();
+            muatPesan();
+
+            const chatForm = document.getElementById('chat-form');
+            if (chatForm) {
+                chatForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const submitBtn = document.getElementById('btn-kirim-pesan');
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Mengirim...</span>';
+
+                    const payload = {
+                        namaSiswa: document.getElementById('nama-siswa').value,
+                        guruTujuan: document.getElementById('guru-tujuan').value,
+                        pesan: document.getElementById('pesan-siswa').value
+                    };
+
+                    try {
+                        await fetch(SCRIPT_URL, {
+                            method: 'POST',
+                            body: JSON.stringify(payload)
+                        });
+                        
+                        document.getElementById('pesan-siswa').value = '';
+                        await muatPesan();
+                    } catch (error) {
+                        alert('Gagal mengirim pesan. Silakan coba lagi.');
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Kirim Pesan</span>';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
